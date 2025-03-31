@@ -1,0 +1,36 @@
+{% extends "app_home/global/index.html" %} 
+{% block title %}Criar Pizza{% endblock title %} {% block content %}
+<main>
+  <h1>Criar Pizza</h1>
+
+  <form action="{% url 'pizza' %}" method="post">
+    {% csrf_token %}
+
+    <label for="nome">Nome da Pizza:</label>
+    <input type="text" name="nome" id="nome" required /><br />
+    <label for="preco">Preço:</label>
+    <input type="number" name="preco" id="preco" required /><br />
+    <label for="img">Imagem:</label>
+    <input type="text" name="img" id="img" required /><br />
+    <label for="descricao">Descrição:</label>
+    <textarea name="descricao" id="descricao" required></textarea><br />
+
+    <input type="submit" value="Criar Pizza" />
+  </form>
+  {% if pizza %}
+  <span>
+    <h2>Pizza Criada com Sucesso!</h2>
+    <p>Nome: {{ pizza.nome }}</p>
+    <p>Preço: R$ {{ pizza.preco }}</p>
+    <p>Imagem: {{ pizza.img }}</p>
+    <img src="{{ pizza.img }}" alt="{{ pizza.nome }}" />
+    <p>Descrição: {{ pizza.descricao }}</p>
+  </span>
+  {% endif %} {% if error %}
+  <span>
+    <h2>Erro ao Criar Pizza!</h2>
+    <p>{{ error }}</p>
+  </span>
+  {% endif %}
+</main>
+{% endblock content %}
