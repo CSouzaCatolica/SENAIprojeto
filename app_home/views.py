@@ -1,11 +1,13 @@
 from decimal import Decimal
 from django.shortcuts import render, redirect
 from app_home.models import PizzaModel
+from django.http import HttpResponse
 # extenção legal é a codeium
 
 
 # Create your views here.
 def home(request):
+    print(request.session.get('pizza', [])) # Pega as pizzas do carrinho ou uma lista vazia se não houver nenhuma pizza no carrinho | LocalStorage do navegador (geralmente)
     # pizzas = [
     #     {'nome': 'Calabresa', 'descricao': 'Pizza de calabresa', 'preco': 20.99, 'img': 'https://media.discordapp.net/attachments/1035029551375454248/1356075306074509382/pizza.png?ex=67eb3f0b&is=67e9ed8b&hm=9c30f1d0a9374f322c374d246b3aa1b8fd49baa107bdc6b61f1ed6c2daa5d49c&=&format=webp&quality=lossless'},
     #     {'nome': 'Mussarela', 'descricao': 'Pizza de mussarela', 'preco': 19.99, 'img': 'https://media.discordapp.net/attachments/1035029551375454248/1356075306074509382/pizza.png?ex=67eb3f0b&is=67e9ed8b&hm=9c30f1d0a9374f322c374d246b3aa1b8fd49baa107bdc6b61f1ed6c2daa5d49c&=&format=webp&quality=lossless'},
@@ -68,3 +70,37 @@ def editar_pizza(request, id):
             descricao=pizza.descricao
         )
         return redirect('listar_pizzas')
+    
+    
+def carrinho_pizzas(request, id):
+    pizzas = request.session.get('pizza', []) # Pega as pizzas do carrinho ou uma lista vazia se não houver nenhuma pizza no carrinho | LocalStorage do navegador (geralmente)
+    pizzas.append(id) # Adiciona a pizza ao carrinho
+    request.session['pizza'] = pizzas # Atualiza a sessão com as pizzas do carrinho
+    return redirect('home')
+
+
+def carrinho_comprar(request):
+    pizzas = request.session.get('pizza', [])
+    lista_pizzas = [] 
+    for pizza in pizzas:
+        try:
+            pizza = PizzaModel.objects.get(id=pizza)
+            lista_pizzas.append(pizza)
+        except PizzaModel.DoesNotExist:
+            print(pizza)
+            print(pizzas)
+            pizzas.remove(pizza)
+            request.session['pizza'] = pizzas
+            pass
+    # total_price = sum(pizza.preco for pizza in lista_pizzas)
+    return render(request, 'app_home/pages/listar_carrinho.html', context={'pizzas': lista_pizzas})
+
+def limpar_carrinho(request):
+    request.session['pizza'] = []
+    return redirect('carrinho_comprar')
+
+def deletar_pizza_carrinho(request, id):
+    pizzas = request.session.get('pizza', [])
+    pizzas.remove(id)
+    request.session['pizza'] = pizzas
+    return redirect('carrinho_comprar')
