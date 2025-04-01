@@ -1,0 +1,14 @@
+{% block title %}Listar Pizzas{% endblock title %} {% block content %}
+
+<main>
+    <h1>Listar Pizzas</h1>
+    {% for pizza in pizzas %}
+        <li>
+            <span>{{ pizza.nome }} - R${{ pizza.preco }} - {{ pizza.descricao }} | <a href="{% url 'deletar_pizza' pizza.id %}">Remover Pizza</a> | <a href="{% url 'editar_pizza' pizza.id %}">Editar Pizza</a></span>
+        </li>
+    {% empty %}
+        <p>No pizzas available .</p>
+    {% endfor %}
+</main>
+
+{% endblock content %}

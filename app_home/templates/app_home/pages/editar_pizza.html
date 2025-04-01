@@ -1,0 +1,22 @@
+{% extends "app_home/global/index.html" %} 
+{% block title %}Editar Pizza{% endblock title %} {% block content %}
+{% comment %} {% load custom_filters %} nn ta sendo usado mas seria chamado tipo {{ pizza.preco|virgula_para_ponto }} {% endcomment %}
+<main>
+  <h1>Editar Pizza</h1>
+
+  <form action="{% url 'editar_pizza' pizza.id %}" method="post">
+    {% csrf_token %}
+
+    <label for="nome">Nome da Pizza:</label>
+    <input type="text" name="nome" id="nome" required value="{{ pizza.nome }}"/><br />
+    <label for="preco">Preço:</label>
+    <input type="number" name="preco" id="preco" required value="{{ pizza.preco }}"/><br />
+    <label for="img">Imagem:</label>
+    <input type="text" name="img" id="img" required value="{{ pizza.imagem }}"/><br />
+    <label for="descricao">Descrição:</label>
+    <textarea name="descricao" id="descricao" value="{{ pizza.descricao }}"></textarea><br />
+
+    <input type="submit" value="Salvar alterações" />
+  </form>
+</main>
+{% endblock content %}

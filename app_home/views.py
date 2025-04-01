@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from decimal import Decimal
+from django.shortcuts import render, redirect
 from app_home.models import PizzaModel
+# extenção legal é a codeium
+
 
 # Create your views here.
 def home(request):
@@ -20,17 +23,48 @@ def criar_pizza(request):
     elif request.method == 'POST':
         
         # Os dados do formulário são enviados via POST conforme o .get('nome') é
-        # equivalente ao nome dentro do form do html criar_pizza.html <input type="*" name="nome"> ele se guia pelo att name
+        # equivalente ao nome dentro do form do html criar_pizza.html <input type="*" nome="nome"> ele se guia pelo att nome
         nome = request.POST.get('nome')
         preco = request.POST.get('preco')
         img = request.POST.get('img')
         descricao = request.POST.get('descricao')
         pizza = PizzaModel.objects.create(
-            name=nome, 
+            nome=nome, 
             preco=preco, 
             imagem=img, 
-            ingredientes=descricao
+            descricao=descricao
         )
         # pizza = PizzaModel(nome=nome, preco=preco, img=img, descricao=descricao)
         # pizza.save()
         return render(request, 'app_home/pages/home.html', context={'pizzas': [pizza]})
+    
+    
+def listar_pizzas(request):
+    pizzas = PizzaModel.objects.all()
+    return render(request, 'app_home/pages/listar.html', context={'pizzas': pizzas})
+
+def deletar_pizza(request, id):
+    pizza = PizzaModel.objects.get(id=id)
+    pizza.delete()
+    return redirect('listar_pizzas')
+
+def editar_pizza(request, id):
+    if request.method == 'GET':
+        pizza = PizzaModel.objects.get(id=id)    
+        return render(request, 'app_home/pages/editar_pizza.html', context={'pizza': pizza})
+    # O método GET é usado para obter dados do servidor. Neste caso, ele está buscando uma pizza específica com base no ID fornecido na URL.
+    elif request.method == 'POST':
+        pizza = PizzaModel.objects.get(id=id)
+        pizza.nome = request.POST.get('nome')
+        pizza.preco = Decimal(request.POST.get('preco').replace(',', '.'))
+        pizza.preco = request.POST.get('preco')
+
+        pizza.imagem = request.POST.get('img')
+        pizza.descricao = request.POST.get('descricao')
+        PizzaModel.objects.filter(id=id).update(
+            nome=pizza.nome, 
+            preco=pizza.preco, 
+            imagem=pizza.imagem, 
+            descricao=pizza.descricao
+        )
+        return redirect('listar_pizzas')
