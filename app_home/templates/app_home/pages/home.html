@@ -1,41 +1,20 @@
-{% extends 'app_home/global/index.html' %}
+{% extends "app_home/global/index.html" %}
 
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-<section class="pizzas">
-    <h1>Nossas Pizzas</h1>
-    <div class="pizzas-container">
-        {% for pizza in pizzas %}
-            <div class="pizza-card">
-                <div class="pizza-image">
-                    <img src="{{ pizza.imagem }}" alt="{{ pizza.nome }}">
-                </div>
-                <div class="pizza-details">
-                    <h2>Nome: {{ pizza.nome }}</h2>
-                    <p>Descr: {{ pizza.descricao }}</p>
-                    <p class="pizza-price">R$ {{ pizza.preco }}</p>
-                </div>
-                <div class="pizza-actions">
-                    <a href="{% url 'carrinho_pizzas' pizza.id %}" class="btn btn-primary">Adicionar ao Carrinho</a>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</section>
-
-
-    {% comment %} <section class="pizzas">
-        <h1>Nossas Pizzas</h1>
-        <div class="pizzas-container">
-            {% for pizza in pizzas %}
-                <div class="pizza-single">
-                    <img src="{{ pizza.img }}" alt="{{ pizza.nome }}">
-                    <h2>{{ pizza.nome }}</h2>
-                    <p>{{ pizza.descricao }}</p>
-                    <p>R$ {{ pizza.preco }}</p>
-                </div>
-            {% endfor %}
+<main>
+    <div class="cardapio">
+        {% for pizza in produtos %}
+        <div class="cardapio-item">
+            <img src="{{ pizza.imagem }}">
+            <h3>{{ pizza.pizza }}</h3>
+            <p>{{ pizza.ingredientes }}</p>
+            <span>R${{ pizza.preco }}</span>
+            <a href="{% url 'carrinho_pizza' pizza.id %}">Adicionar no carrinho</a>
         </div>
-    </section> {% endcomment %}
+        {% endfor %}
+
+    </div>
+</main>
 {% endblock content %}

@@ -1,5 +1,5 @@
 """
-ASGI config for ggp project.
+ASGI config for pizzaria_zmais project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ggp.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pizzaria_zmais.settings')
 
 application = get_asgi_application()
