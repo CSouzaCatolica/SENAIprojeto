@@ -11,10 +11,15 @@
         <span>(48) 9999-9999</span>
     </nav>
     {% if request.user.is_authenticated %}
-    <div class="admin">
-        <a href="{% url 'pizza' %}">Criar Pizza</a>
-        <a href="{% url 'listar' %}">Listar Pizza</a>
-    </div>
+        <div class="admin">
+            <a href="{% url 'pizza' %}">Criar Pizza</a>
+            <a href="{% url 'listar' %}">Listar Pizza</a>
+        </div>
+        {% else %}
+            <div class="admin">
+                <a href="{% url 'login' %}">Login</a>
+            </div>
     {% endif %}
+
 
 </header>
