@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Pizzaria ZMais</title>
+
+    <!-- CSS principal do login -->
+    <link rel="stylesheet" href="{% static 'app_home/css/login.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <img src="{% static 'app_home/img/ggpLogo.png' %}" alt="Logo" class="logo">
+        
+        <div class="login-content">
+            <h2>Login</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Usuário" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>    
+</body>
+</html>
