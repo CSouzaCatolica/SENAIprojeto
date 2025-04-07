@@ -1,3 +1,4 @@
+import os, hashlib, binascii
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
@@ -17,6 +18,21 @@ class Usuario(models.Model):
     d_admissao = models.DateField()
     d_demissao = models.DateField(null=True, blank=True)
     status = models.BooleanField(default=1)
+    
+    # senha com salt + hash
+    def codSenha(senha: str) -> str:
+        salt = os.urandom(32)
+        hash_bytes = hashlib.pbkdf2_hmac('sha256', senha.encode(), salt, 100_000)
+        salt_hex = binascii.hexlify(salt).decode()
+        hash_hex = binascii.hexlify(hash_bytes).decode()
+        return f"{salt_hex}${hash_hex}"
+    
+    def checkSenha(senhaDigitada: str, senhaHash: str) -> bool:
+        salt_hex, hash_hex = senhaHash.split('$')
+        salt = binascii.unhexlify(salt_hex)
+        new_hash_bytes = hashlib.pbkdf2_hmac('sha256', senhaDigitada.encode(), salt, 100_000)
+        new_hash_hex = binascii.hexlify(new_hash_bytes).decode()
+        return hash_hex == new_hash_hex
 
     def __str__(self):
         return self.nome
