@@ -49,8 +49,10 @@ body {
     border-radius: 100px;
     border: none;
     font-size: 16px;
+}
+
+input {
     background-color: #403666;
-    color: #1B1A37;
 }
 
 .login-container button {
@@ -66,5 +68,6 @@ body {
 }
 
 .login-container button:hover {
-    background-color: #d62828;
+    background-color: #13ce13;
+    color: #13ce13;
 }
