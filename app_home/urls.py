@@ -3,6 +3,7 @@ from app_home import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+<<<<<<< HEAD
     path('pizza/', views.criar_pizza, name='pizza'),
     path('listar/', views.listar_pizzas, name='listar'),
     path('deletar/<int:id>', views.deletar_pizza, name='deletar_pizza'),
@@ -10,4 +11,6 @@ urlpatterns = [
     path('carrinho/', views.comprar_carrinho_pizza, name='comprar_carrinho_pizza'),
     path('carrinho/<int:id>', views.carrinho_pizza, name='carrinho_pizza'),
     path('login/', views.login_view, name='login'),
+=======
+>>>>>>> main
 ]

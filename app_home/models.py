@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
+<<<<<<< HEAD
 class PizzaModel(models.Model):
     pizza = models.CharField(max_length=100)
     preco = models.DecimalField(max_digits=5, decimal_places=2)
@@ -13,3 +14,5 @@ class PizzaModel(models.Model):
 
     def __str__(self):
         return f"Pizza({self.pizza}, {self.preco}, {self.ingredientes})"
+=======
+>>>>>>> main
