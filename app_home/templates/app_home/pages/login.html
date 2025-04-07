@@ -1,22 +1,27 @@
-
-
 {% load static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'app_home/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'app_home/css/login.css' %}" />
+    <link rel="icon" href="{% static 'app_home/img/favicon.ico' %}" type="image/x-icon">
     <title>Document</title>
   </head>
   <body>
     {% block content %}
-    <h1>Login</h1>
-    <form action="{% url 'login' %}" method="POST">
-      {% csrf_token %}
-      <input type="text" name="username" placeholder="username" />
-      <input type="password" name="password" placeholder="password" />
-      <button type="submit">Login</button>
-    </form>
-    {% endblock content %}
+    <div class="login-container">
+      <img src="{% static 'app_home/img/ggpLogo.png' %}" alt="Logo" class="logo"/>
+
+      <div class="login-content">
+        <h2>Login</h2>
+        <form action="{% url 'login' %}" method="POST">
+          {% csrf_token %}
+          <input type="text" name="username" placeholder="Usuário" required />
+          <input type="password" name="password" placeholder="Senha" required />
+          <button type="submit">Entrar</button>
+        </form>
+      </div>
+    </div>
+    {% endblock content %} {% csrf_token %}
   </body>
 </html>
