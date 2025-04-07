@@ -53,6 +53,7 @@ body {
 
 input {
     background-color: #403666;
+    color: white;
 }
 
 .login-container button {
