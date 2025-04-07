@@ -32,7 +32,7 @@ def home(request):
 
 def login(request):
     if request.method == 'GET':
-        if 'autorized' in request.session and request.session['authorized'] == True:
+        if 'authorized' in request.session and request.session['authorized'] == True:
             return redirect('/')
         return render(request, 'app_home/pages/login.html')
     elif request.method == 'POST':
