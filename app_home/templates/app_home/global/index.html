@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Home</h1>
+    <p>Current user: {% if user.is_anonymous %}AnonymousUser{% else %}{{ user.username }}{% endif %}</p>
+    <p>Is authenticated: {{ user.is_authenticated }}</p>
+    <p>Is superuser: {{ user.is_superuser }}</p>
+    <p>Is staff: {{ user.is_staff }}</p>
+    <p>Is active: {{ user.is_active }}</p>
+
+    {% if authorized %}
+        voce está autorizado
+    {% else %}
+        voce não está autorizado
+    {% endif %}
+</body>
+</html>
