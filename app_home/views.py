@@ -1,14 +1,53 @@
+import os, hashlib, binascii
 from django.shortcuts import render, redirect
-from app_home.models import PizzaModel
-from django.core.mail import send_mail
-from django.contrib.auth.decorators import login_required
+from app_home.models import Cargos, Usuario, Item, Estoque, Emprestimo
+
+# senha com salt + hash
+def codSenha(senha: str) -> str:
+    salt = os.urandom(32)
+    hash_bytes = hashlib.pbkdf2_hmac('sha256', senha.encode(), salt, 100_000)
+    
+    salt_hex = binascii.hexlify(salt).decode()
+    hash_hex = binascii.hexlify(hash_bytes).decode()
+    
+    return f"{salt_hex}${hash_hex}"
+def checkSenha(senhaDigitada: str, senhaHash: str) -> bool:
+    salt_hex, hash_hex = senhaHash.split('$')
+    salt = binascii.unhexlify(salt_hex)
+    
+    new_hash_bytes = hashlib.pbkdf2_hmac('sha256', senhaDigitada.encode(), salt, 100_000)
+    new_hash_hex = binascii.hexlify(new_hash_bytes).decode()
+    
+    return hash_hex == new_hash_hex
+
+
+
 
 # Create your views here.
 def home(request):
-    pizzas = [
-        {'nome': 'Calabresa', 'descricao': 'Pizza de calabresa', 'preco': 20.99, 'img': 'https://media.discordapp.net/attachments/1035029551375454248/1356075306074509382/pizza.png?ex=67eb3f0b&is=67e9ed8b&hm=9c30f1d0a9374f322c374d246b3aa1b8fd49baa107bdc6b61f1ed6c2daa5d49c&=&format=webp&quality=lossless'},
-        {'nome': 'Mussarela', 'descricao': 'Pizza de mussarela', 'preco': 19.99, 'img': 'https://media.discordapp.net/attachments/1035029551375454248/1356075306074509382/pizza.png?ex=67eb3f0b&is=67e9ed8b&hm=9c30f1d0a9374f322c374d246b3aa1b8fd49baa107bdc6b61f1ed6c2daa5d49c&=&format=webp&quality=lossless'},
-        {'nome': 'Portuguesa', 'descricao': 'Pizza de portuguesa', 'preco': 22.99, 'img': 'https://media.discordapp.net/attachments/1035029551375454248/1356075306074509382/pizza.png?ex=67eb3f0b&is=67e9ed8b&hm=9c30f1d0a9374f322c374d246b3aa1b8fd49baa107bdc6b61f1ed6c2daa5d49c&=&format=webp&quality=lossless'},
-    ]
+    return render(request, 'app_home/global/index.html', context={'usuario': request.session.get('usuario') or None
+                                                       , 'cargo': request.session.get('id_cargo') or None
+                                                       , 'authorized': request.session.get('authorized') or False})
 
-    return render(request, 'app_home/pages/home.html', {'pizzas': pizzas})
+
+def login(request):
+    if request.method == 'GET':
+        if 'autorized' in request.session and request.session['authorized'] == True:
+            return redirect('/')
+        return render(request, 'app_home/pages/login.html')
+    elif request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if Usuario.objects.filter(nome=username).exists():
+            if checkSenha(password, Usuario.objects.get(nome=username).senha):
+                request.session['usuario'] = username
+                request.session['id'] = Usuario.objects.get(nome=username).id
+                request.session['id_cargo'] = Usuario.objects.get(nome=username).cargo.id
+                request.session['authorized'] = True
+                return redirect('/')
+            else:
+                print("Senha incorreta") # senha incorreta TODO
+                return redirect('/login')
+        else:
+            print("Usuário não encontrado") # usuário não encontrado TODO
+            return redirect('/login')
