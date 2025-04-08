@@ -1,6 +1,10 @@
-import os, hashlib, binascii
+import os, hashlib, binascii, uuid
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils import timezone
+from datetime import timedelta
+
+
 
 # Create your models here.
 class Cargos(models.Model):
@@ -64,3 +68,37 @@ class Emprestimo(models.Model):
     d_devolvido = models.DateField(null=True, blank=True)
     quantidade = models.IntegerField()
     status = models.BooleanField(default=1)
+
+
+class Token(models.Model):
+    usuario = models.OneToOneField('Usuario', on_delete = models.CASCADE)
+    token = models.CharField(max_length = 64, unique = True)
+    criado_em = models.DateTimeField(auto_now_add = True)
+    expira_em = models.DateTimeField()
+    
+    def __str__(self):
+        return self.token
+
+    def isExpired(TokenID):
+        # retorna True se o token não estiver expirado
+        try:
+            Obj = Token.objects.get(id=TokenID)
+        except Token.DoesNotExist:
+            return True
+        print(Obj.expira_em)
+        print(timezone.now())
+        print(Obj.expira_em > timezone.now())
+        if timezone.now() > Obj.expira_em:
+            return False
+        return True
+        
+        
+    @staticmethod
+    def gerar_token(usuario_id):
+        token = uuid.uuid4().hex
+        expira = timezone.now() + timedelta(days=1, hours=12)
+        obj, _ = Token.objects.update_or_create(
+            usuario_id=usuario_id,
+            defaults={'token': token, 'expira_em': expira}
+        )
+        return obj

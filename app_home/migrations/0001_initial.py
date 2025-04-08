@@ -66,4 +66,14 @@ class Migration(migrations.Migration):
                 ('solicitante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='emprestimos_feitos', to='app_home.usuario')),
             ],
         ),
+        migrations.CreateModel(
+            name='Token',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('token', models.CharField(max_length=64, unique=True)),
+                ('criado_em', models.DateTimeField(auto_now_add=True)),
+                ('expira_em', models.DateTimeField()),
+                ('usuario', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='app_home.usuario')),
+            ],
+        ),
     ]
