@@ -3,6 +3,10 @@ from app_home.models import Cargos, Usuario, Item, Estoque, Emprestimo
 
 
 # Create your views here.
+def dev(request):
+    return render(request, 'app_home/pages/home.html')
+
+
 def home(request):
     return render(request, 'app_home/global/index.html', context={'usuario': request.session.get('usuario') or None
                                                        , 'cargo': request.session.get('id_cargo') or None
