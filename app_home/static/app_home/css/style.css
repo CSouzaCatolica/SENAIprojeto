@@ -23,10 +23,11 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: var(--fonte-primaria);
-    background-image: url('https://drive.google.com/file/d/19glyQ3CBGGR2s4535j1Q7z77kUILA14p/view?usp=drive_link');
-    background-size: cover;       
-    background-position: center;  
+    background-image: url('../img/background.png');
+    background-size: 1920px 1080px; 
+    background-position: center center;  
     background-repeat: no-repeat; 
+    background-attachment: fixed;
 }
 
 .conteudo {
@@ -58,16 +59,19 @@ body {
     padding: 20px 10px 10px 10px;
     gap: 20px; 
     text-decoration: none;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    width: 7.5%;
 }
 
 .telas a {
     font-family: var(--fonte-primaria);
-    color: #403666;
+    color: #ffffff;
     text-decoration: none;
 }
 
 .telas a:hover {
-    color: yellow;
+    color: yellow;  
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -75,7 +79,7 @@ body {
     padding: 10px;
     text-align: center;
     font-family: var(--fonte-primaria);
-    color: black;
+    color: rgb(255, 255, 255);
 }
 .ggpTitle {
     font-family: var(--fonte-dois);
