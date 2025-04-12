@@ -11,8 +11,26 @@
 :root {
     --fonte-primaria: 'Rubik', sans-serif;
     --fonte-dois: 'Rubik Doodle Shadow', cursive;
+
 }
 
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: var(--fonte-primaria);
+}
+
+.conteudo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
 .cabecalhoHome div {
 
     background-color: #403666;
@@ -49,6 +67,12 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.footer {
+    padding: 10px;
+    text-align: center;
+    font-family: var(--fonte-primaria);
+    color: black;
+=======
 .ggpTitle {
     font-family: var(--fonte-dois);
     font-style: normal;
