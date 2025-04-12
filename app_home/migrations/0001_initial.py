@@ -44,8 +44,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nome', models.CharField(max_length=255)),
-                ('email', models.EmailField(max_length=254, unique=True)),
+                ('email', models.EmailField(max_length=254)),
                 ('senha', models.CharField(max_length=255)),
+                ('pfp_ref', models.CharField(blank=True, max_length=255, null=True)),
                 ('d_admissao', models.DateField()),
                 ('d_demissao', models.DateField(blank=True, null=True)),
                 ('status', models.BooleanField(default=1)),
