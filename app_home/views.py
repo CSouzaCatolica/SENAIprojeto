@@ -158,13 +158,15 @@ def create_user(request):
                 senha = Usuario.codSenha(request.POST.get('senha')),
                 pfp_ref = request.POST.get('pfp_ref'),
                 cargo = Cargos.objects.get(id=request.POST.get('cargo')),
-                d_admissao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                d_admissao = datetime.now() 
             )
             ctx['newUser'] = newUser
-            return redirect('/get_allUsers', context = ctx, status=200)
+            print(ctx)
+            return redirect('/usuarios', context = ctx, status=200)
         else:
             ctx['error'] = "Falta de parametro" # print("Falta de parametro")
-        return redirect('/get_allUsers', context = ctx, status=400)
+            print(ctx)
+        return redirect('/usuarios', context = ctx, status=400)
     
     
     
