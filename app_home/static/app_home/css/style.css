@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-/* fonte perazza::after
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 
 */
@@ -10,6 +10,7 @@
 
 :root {
     --fonte-primaria: 'Rubik', sans-serif;
+    --fonte-dois: 'Rubik Doodle Shadow', cursive;
 
 }
 
@@ -35,6 +36,10 @@ body {
     background-color: #403666;
     color: #ffffff;
     font-family: var(--fonte-primaria);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 28px;
     display: flex;
     justify-content: space-between;
     text-align: center;
@@ -67,4 +72,21 @@ body {
     text-align: center;
     font-family: var(--fonte-primaria);
     color: black;
+=======
+.ggpTitle {
+    font-family: var(--fonte-dois);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+}
+
+.ggpNavUserName {
+    font-family: var(--fonte-primaria);
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
 }
