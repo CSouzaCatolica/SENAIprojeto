@@ -77,6 +77,8 @@ body {
     font-family: var(--fonte-primaria);
     color: black;
 }
+
+
 .ggpTitle {
     font-family: var(--fonte-dois);
     font-style: normal;
