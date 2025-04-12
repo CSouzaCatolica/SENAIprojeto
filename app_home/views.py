@@ -20,18 +20,28 @@ def home(request):
     return render(request, 'app_home/global/index.html', context = get_context(request))
 
 def view_cargos(request):
+    ctx = get_context(request)
+    ctx['cargos'] = Cargos.objects.all()
     return render(request, 'app_home/pages/cargos.html', context = get_context(request))
 
 def view_itens(request):
+    ctx = get_context(request)
+    ctx['itens'] = Item.objects.all()
     return render(request, 'app_home/pages/itens.html', context = get_context(request))
 
 def view_emprestimos(request):
+    ctx = get_context(request)
+    ctx['emprestimos'] = Emprestimo.objects.all()
     return render(request, 'app_home/pages/emprestimos.html', context = get_context(request))
 
 def view_estoque(request):
+    ctx = get_context(request)
+    ctx['estoque'] = Estoque.objects.all()
     return render(request, 'app_home/pages/estoque.html', context = get_context(request))
 
 def view_usuarios(request):
+    ctx = get_context(request)
+    ctx['usuarios'] = Usuario.objects.all()
     return render(request, 'app_home/pages/usuarios.html', context = get_context(request))
 
 

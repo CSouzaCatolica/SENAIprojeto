@@ -1,5 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
+*/
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+:root {
+    --fonte-primaria: 'Rubik', sans-serif;
+    --fonte-dois: 'Rubik Doodle Shadow', cursive;
+
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: var(--fonte-primaria);
+    background-image: url('https://drive.google.com/file/d/19glyQ3CBGGR2s4535j1Q7z77kUILA14p/view?usp=drive_link');
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat; 
+}
+
+.conteudo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.cabecalhoHome div {
+
+    background-color: #403666;
+    color: #ffffff;
+    font-family: var(--fonte-primaria);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 28px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 10px;
+}
+
+.telas {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px 10px 10px 10px;
+    gap: 20px; 
+    text-decoration: none;
+}
+
+.telas a {
+    font-family: var(--fonte-primaria);
+    color: #403666;
+    text-decoration: none;
+}
+
+.telas a:hover {
+    color: yellow;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.footer {
+    padding: 10px;
+    text-align: center;
+    font-family: var(--fonte-primaria);
+    color: black;
+}
+.ggpTitle {
+    font-family: var(--fonte-dois);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+}
+
+.ggpNavUserName {
+    font-family: var(--fonte-primaria);
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
 }
