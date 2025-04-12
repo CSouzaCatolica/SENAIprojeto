@@ -11,16 +11,41 @@ def get_context(request) -> dict:
 
 
 # Create your views here.
+def dev(request):
+    return render(request, 'app_home/pages/cadastro.html')
+
 #---==================================================================================================---
 #                   views
 #---==================================================================================================---
 
 def home(request):
+    return redirect('/usuarios')
+    # return render(request, 'app_home/global/index.html', context = get_context(request))
 
-    return render(request, 'app_home/global/home.html', context = get_context(request))
+def view_cargos(request):
+    ctx = get_context(request)
+    ctx['cargos'] = Cargos.objects.all()
+    return render(request, 'app_home/pages/cargos.html', context = get_context(request))
 
+def view_itens(request):
+    ctx = get_context(request)
+    ctx['itens'] = Item.objects.all()
+    return render(request, 'app_home/pages/itens.html', context = get_context(request))
+
+def view_emprestimos(request):
+    ctx = get_context(request)
+    ctx['emprestimos'] = Emprestimo.objects.all()
+    return render(request, 'app_home/pages/emprestimos.html', context = get_context(request))
+
+def view_estoque(request):
+    ctx = get_context(request)
+    ctx['estoque'] = Estoque.objects.all()
+    return render(request, 'app_home/pages/estoque.html', context = get_context(request))
 
 def view_usuarios(request):
+    ctx = get_context(request)
+    ctx['usuarios'] = Usuario.objects.all()
+    print(ctx['usuarios'])
     return render(request, 'app_home/pages/usuarios.html', context = get_context(request))
 
 
@@ -134,13 +159,15 @@ def create_user(request):
                 senha = Usuario.codSenha(request.POST.get('senha')),
                 pfp_ref = request.POST.get('pfp_ref'),
                 cargo = Cargos.objects.get(id=request.POST.get('cargo')),
-                d_admissao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                d_admissao = datetime.now() 
             )
-            ctx['newUser'] = newUser
-            return redirect('/get_allUsers', context = ctx, status=200)
+            ctx['users'] = newUser
+            print(ctx)
+            return redirect('/usuarios', context = ctx, status=200)
         else:
             ctx['error'] = "Falta de parametro" # print("Falta de parametro")
-        return redirect('/get_allUsers', context = ctx, status=400)
+            print(ctx)
+        return redirect('/usuarios', context = ctx, status=400)
     
     
     

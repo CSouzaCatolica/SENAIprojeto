@@ -6,7 +6,15 @@ urlpatterns = [
     #views
     path('', views.home, name='home'),
     path('login', views.login, name='login'),
+    # path('logout', views.logout_view, name='logout'),
+    
+    path('dev', views.dev, name='dev'),
+
     path('usuarios', views.view_usuarios, name='view_usuarios'),
+    path('cargos', views.view_cargos, name='view_cargos'),
+    path('itens', views.view_itens, name='view_itens'),
+    path('emprestimos', views.view_emprestimos, name='view_emprestimos'),
+    path('estoque', views.view_estoque, name='view_estoque'),
     #users
     path('get_user/<int:id>', views.get_user, name='get_user'),
     path('get_allUsers', views.get_allUsers, name='get_allUsers'),
