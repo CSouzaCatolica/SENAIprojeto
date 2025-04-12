@@ -1,20 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+/* fonte perazza::after
+
+
+*/
 * {
     margin: 0;
     padding: 0;
 }
 
 :root {
-    --fonte-primaria: 'Krona One', sans-serif;
+    --fonte-primaria: 'Rubik', sans-serif;
+    
 }
 
 .cabecalhoHome div {
 
-    background-color: bisque;
+    background-color: #403666;
+    color: #ffffff;
+    font-family: var(--fonte-primaria);
     display: flex;
     justify-content: space-between;
     text-align: center;
     padding: 10px;
-    margin: 0 10px 0 10px;
 }
 
 .telas {
@@ -24,4 +31,16 @@
     align-items: flex-start;
     padding: 20px 10px 10px 10px;
     gap: 20px; 
+    text-decoration: none;
+}
+
+.telas a {
+    font-family: var(--fonte-primaria);
+    color: #403666;
+    text-decoration: none;
+}
+
+.telas a:hover {
+    color: yellow;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
