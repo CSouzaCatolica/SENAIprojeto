@@ -17,8 +17,19 @@ def get_context(request) -> dict:
 
 def home(request):
 
-    return render(request, 'app_home/global/home.html', context = get_context(request))
+    return render(request, 'app_home/global/index.html', context = get_context(request))
 
+def view_cargos(request):
+    return render(request, 'app_home/pages/cargos.html', context = get_context(request))
+
+def view_itens(request):
+    return render(request, 'app_home/pages/itens.html', context = get_context(request))
+
+def view_emprestimos(request):
+    return render(request, 'app_home/pages/emprestimos.html', context = get_context(request))
+
+def view_estoque(request):
+    return render(request, 'app_home/pages/estoque.html', context = get_context(request))
 
 def view_usuarios(request):
     return render(request, 'app_home/pages/usuarios.html', context = get_context(request))

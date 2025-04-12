@@ -1,0 +1,23 @@
+{% extends "app_home/global/index.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<section>
+    <h1>Item</h1>
+    <form action="{% url 'create_item' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="nome" placeholder="Item" required>
+        <input type="text" name="quantidade" placeholder="Quantidade" required>
+        <input type="date" name="d_vencimento" placeholder="Data de Vencimento" required>
+        <button type="submit">Entrar</button>
+    </form>
+    <h1>Itens</h1>
+    <ul>
+        {% for item in itens %}
+            <li>{{ item.nome }} - {{ item.quantidade }} - {{ item.d_vencimento }} - {{ item.id }}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% endblock content %}

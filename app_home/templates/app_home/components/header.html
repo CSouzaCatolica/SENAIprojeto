@@ -4,7 +4,7 @@
         header
         Context = 
         
-        {% comment %} {% for usuario in usuarios %}
+        {% for usuario in usuarios %}
         <p>
             {{usuario.nome}}
             {{usuario.email}}
@@ -13,7 +13,7 @@
             {{usuario.cargo}}
             {{usuario.status}}
         </p>
-        {% endfor %} {% endcomment %}
+        {% endfor %}
             
     </nav>
 </header>
