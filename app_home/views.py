@@ -5,19 +5,24 @@ from app_home.models import Cargos, Usuario, Item, Estoque, Emprestimo, Token
 
 # Create your views here.
 def home(request):
-    token = ""
-    # print(Token.validar(request.session.get('token'))) TODO
-    # token_id = Token.objects.get(usuario_id=Usuario.objects.get(id=request.session.get('id_user')).id).id
+    try:
+        token = request.session.get('token')
+        token_id = Token.objects.get(token=token).id
+        print(f"token = {request.session.get('token')}\ntoken_id = {token_id}")
     
-    # if not Token.isExpired(token_id):
-        # print("DEBUG -> Token invalido!")
-        # return redirect('/login')
-    return render(request, 'app_home/global/index.html', context={'user': request.session.get('id_user') or None
+        if not Token.isExpired(token_id):
+            return redirect('/login')
+        return render(request, 'app_home/global/index.html', context={'user': request.session.get('id_user') or None
                                                        , 'cargo': request.session.get('id_cargo') or None
                                                        , 'token': token})
+    except KeyError:
+        print("DEBUG -> Token invalido!")
+        return redirect('/login')
+    
 
 
 def login(request):
+    print(Usuario.codSenha("123"))
     if request.method == 'GET':
         # if 'authorized' in request.session and request.session['authorized'] == True: TODO
             # return redirect('/')
