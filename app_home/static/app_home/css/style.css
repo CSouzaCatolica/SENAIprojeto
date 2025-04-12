@@ -81,6 +81,8 @@ body {
     font-family: var(--fonte-primaria);
     color: rgb(255, 255, 255);
 }
+
+
 .ggpTitle {
     font-family: var(--fonte-dois);
     font-style: normal;
