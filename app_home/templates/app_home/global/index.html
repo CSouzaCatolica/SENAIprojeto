@@ -6,11 +6,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Home{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'app_home/css/style.css' %}" />
     <link rel="icon" href="{% static 'app_home/img/favicon.ico' %}" type="image/x-icon">
+
 </head>
+    <header>
+        <nav class="cabecalhoHome">
+            <div>
+                <h1>Home</h1>
+                <p>Pedro Gameplays dos Santos <img src="" alt="fotoPerfil"></p>
+            </div>  
+        </nav>
+    </header>
 <body>
-    <h1>Home</h1>
-    <p>Current user: {% if user.is_anonymous %}AnonymousUser{% else %}{{ user.username }}{% endif %}</p>
+    
+    <section>
+        <div class="telas">
+            <p>Equipamento</p>
+            <p>Controle EPI</p>
+            <p>Colaborador</p>
+        </div>
+    </section>
+
+    <!-- <p>Current user: {% if user.is_anonymous %}AnonymousUser{% else %}{{ user.username }}{% endif %}</p>
     <p>Is authenticated: {{ user.is_authenticated }}</p>
     <p>Is superuser: {{ user.is_superuser }}</p>
     <p>Is staff: {{ user.is_staff }}</p>
@@ -20,6 +38,6 @@
         voce está autorizado
     {% else %}
         voce não está autorizado
-    {% endif %}
+    {% endif %} -->
 </body>
 </html>

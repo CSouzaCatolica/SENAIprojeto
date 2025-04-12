@@ -1,5 +1,27 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+:root {
+    --fonte-primaria: 'Krona One', sans-serif;
+}
+
+.cabecalhoHome div {
+
+    background-color: bisque;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 10px;
+    margin: 0 10px 0 10px;
+}
+
+.telas {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px 10px 10px 10px;
+    gap: 20px; 
 }
