@@ -1,0 +1,21 @@
+{% extends "app_home/global/index.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<section>
+    <h1>Cargos</h1>
+    <form action="{% url 'create_cargo' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="nome" placeholder="Cargo Nome" required>
+        <button type="submit">Entrar</button>
+    </form>
+    <h1>Cargos</h1>
+    <ul>
+        {% for cargo in cargos %}
+            <li>{{ cargo.nome }} - {{ cargo.id }}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% endblock content %}

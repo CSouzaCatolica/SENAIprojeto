@@ -23,6 +23,10 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: var(--fonte-primaria);
+    background-image: url('https://drive.google.com/file/d/19glyQ3CBGGR2s4535j1Q7z77kUILA14p/view?usp=drive_link');
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat; 
 }
 
 .conteudo {
@@ -72,7 +76,9 @@ body {
     text-align: center;
     font-family: var(--fonte-primaria);
     color: black;
-=======
+}
+
+
 .ggpTitle {
     font-family: var(--fonte-dois);
     font-style: normal;

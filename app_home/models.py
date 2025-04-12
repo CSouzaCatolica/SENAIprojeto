@@ -12,9 +12,10 @@ class Cargos(models.Model):
 
 class Usuario(models.Model):
     nome = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     senha = models.CharField(max_length=255)
     cargo = models.ForeignKey(Cargos, on_delete=models.SET_NULL, null=True, related_name='usuarios')
+    pfp_ref = models.CharField(max_length=255, null=True, blank=True)
     d_admissao = models.DateField()
     d_demissao = models.DateField(null=True, blank=True)
     status = models.BooleanField(default=1)
