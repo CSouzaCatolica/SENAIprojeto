@@ -12,7 +12,7 @@ def get_context(request) -> dict:
 
 # Create your views here.
 def dev(request):
-    return render(request, 'app_home/pages/home.html')
+    return render(request, 'app_home/pages/cadastro.html')
 
 #---==================================================================================================---
 #                   views
