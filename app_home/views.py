@@ -19,8 +19,8 @@ def dev(request):
 #---==================================================================================================---
 
 def home(request):
-
-    return render(request, 'app_home/global/index.html', context = get_context(request))
+    return redirect('/usuarios')
+    # return render(request, 'app_home/global/index.html', context = get_context(request))
 
 def view_cargos(request):
     ctx = get_context(request)
@@ -45,6 +45,7 @@ def view_estoque(request):
 def view_usuarios(request):
     ctx = get_context(request)
     ctx['usuarios'] = Usuario.objects.all()
+    print(ctx['usuarios'])
     return render(request, 'app_home/pages/usuarios.html', context = get_context(request))
 
 
@@ -160,7 +161,7 @@ def create_user(request):
                 cargo = Cargos.objects.get(id=request.POST.get('cargo')),
                 d_admissao = datetime.now() 
             )
-            ctx['newUser'] = newUser
+            ctx['users'] = newUser
             print(ctx)
             return redirect('/usuarios', context = ctx, status=200)
         else:

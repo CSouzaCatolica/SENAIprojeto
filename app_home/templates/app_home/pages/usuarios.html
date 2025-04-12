@@ -5,19 +5,9 @@
 {% block content %}
 <section>
     <h1>Usuarios</h1>
-    <form action="{% url 'create_user' %}" method="POST">
-        {% csrf_token %}
-        <input type="text" name="nome" placeholder="Nome de Usuário" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="cargo" placeholder="Cargo" required>
-        <input type="text" name="pfp_ref" placeholder="Imagem de perfil URL" required>
-        <input type="password" name="senha" placeholder="Senha" required>
-        <button type="submit">Entrar</button>
-    </form>
-    <h1>Usuarios</h1>
     <ul>
-        {% for user in users %}
-            <li>{{ user.username }} - {{ user.id }}</li>
+        {% for user in ctx %}
+            <li>{{ user.nome }} - {{ user.id }}</li>
         {% endfor %}
     </ul>
 </section>
