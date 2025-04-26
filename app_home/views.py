@@ -12,7 +12,18 @@ def get_context(request) -> dict:
 
 # Create your views here.
 def dev(request):
-    return render(request, 'app_home/pages/cadastro.html')
+    produtos = [
+    {"nome": "Luvas de Raspa", "cores": "Cinza", "tamanho": "Grande", "qualidade": "Novo", "imagem": "luvas.png"},
+    {"nome": "Cinto de Segurança", "cores": "Verde", "tamanho": "Ajustável", "qualidade": "Novo", "imagem": "cinto.png"},
+    {"nome": "Capacete de Segurança", "cores": "Azul", "tamanho": "Médio", "qualidade": "Novo", "imagem": "capacete.png"},
+    {"nome": "Máscara Filtradora", "cores": "Azul", "tamanho": "Único", "qualidade": "Novo", "imagem": "mascara.png"},
+    {"nome": "Avental de Raspa", "cores": "Cinza", "tamanho": "Médio", "qualidade": "Novo", "imagem": "avental.png"},
+    {"nome": "Abafador de Ruído", "cores": "Verde", "tamanho": "Ajustável", "qualidade": "Novo", "imagem": "abafador.png"},
+    {"nome": "Óculos de Proteção", "cores": "Preto", "tamanho": "Único", "qualidade": "Novo", "imagem": "oculos.png"},
+    {"nome": "Calçado de Segurança", "cores": "Preto", "tamanho": "32, 37, 38, 40", "qualidade": "Novo", "imagem": "calcado.png"},
+]
+
+    return render(request, 'app_home/pages/emprestimos.html', context = {'produtos': produtos})
 
 #---==================================================================================================---
 #                   views

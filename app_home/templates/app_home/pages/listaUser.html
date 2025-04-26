@@ -1,0 +1,33 @@
+{% extends "app_home/global/index.html" %}
+{% load static %}
+
+{% block title %}Listar User{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'app_home/css/listaUser.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="container">
+  <h2>Usuários Cadastrados</h2>
+
+  <div class="user-item">
+    <div class="user-info">
+      <span class="user-name">Pedro Santos</span>
+      <span class="user-email">pedro@email.com</span>
+    </div>
+    <button class="btn-remove">Remover</button>
+  </div>
+
+  <div class="user-item">
+    <div class="user-info">
+      <span class="user-name">Maria Oliveira</span>
+      <span class="user-email">maria@email.com</span>
+    </div>
+    <button class="btn-remove">Remover</button>
+  </div>
+
+</div>
+
+{% endblock content %}
