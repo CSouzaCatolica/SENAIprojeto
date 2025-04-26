@@ -4,8 +4,8 @@
 
 {% block content %}
     <div class="cadastro-container">
-        <h2>Cadastro</h2>
-        <form class="form-cadastro">
+        <h2>Cadastro De Usuarios</h2>
+        <form class="form-cadastro" action="{% url 'create_user' %}" method="POST">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
 
@@ -20,6 +20,15 @@
 
             <button type="submit">Salvar</button>
         </form>
+
+
+        
+        <h2>Usuarios</h2>
+        <ul>
+            {% for colaborador in usuarios %}
+                <li>{{ colaborador.nome }} - {{ colaborador.id }} - <a href="{% url 'update_colaborador' colaborador.id %}">Editar</a> - <a href="{% url 'delete_colaborador' colaborador.id %}">Deletar</a></li>
+            {% endfor %}
+        </ul>
     </div>
 
 {% endblock content %}

@@ -5,9 +5,10 @@
 {% block content %}
     <section class="conteudo">
         <div class="telas">
-            <a href="https://youtube.com">Equipamento</a>
-            <a href="https://youtube.com">Controle EPI</a>
-            <a href="colaborador.html">Colaborador</a>
+            <a style="color: blue;" href="{% url 'view_emprestimos' %}">Emprestimos Ativos</a>
+            <a style="color: blue;" href="{% url 'view_emprestimos_criar' %}">Registrar Emprestimo</a>
+            <a style="color: blue;" href="{% url 'view_itens' %}">Itens</a>
+            <a style="color: blue;" href="{% url 'view_usuarios' %}">Colaborador</a>
         </div>
     </section>
 
