@@ -19,7 +19,7 @@ def dev(request):
 #---==================================================================================================---
 
 def home(request):
-    return render(request, 'app_home/global/index.html', context = {})
+    return render(request, 'app_home/pages/home.html', context = {})
     # return render(request, 'app_home/global/index.html', context = get_context(request))
 
 def view_cargos(request):
@@ -52,7 +52,7 @@ def view_usuarios(request):
     ctx = get_context(request)
     ctx['usuarios'] = Usuario.objects.all()
     print(ctx['usuarios'])
-    return render(request, 'app_home/pages/usuarios.html', context = ctx)
+    return render(request, 'app_home/pages/cadastro.html', context = ctx)
 
 
 
