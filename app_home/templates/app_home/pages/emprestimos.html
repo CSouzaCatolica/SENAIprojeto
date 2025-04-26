@@ -1,10 +1,38 @@
 {% extends "app_home/global/index.html" %}
+{% load static %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Cadastro{% endblock title %}
 
 {% block content %}
+
 <section>
     
+    <meta charset="UTF-8">
+    <title>GGP</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'allitens.css' %}">
+
+    <header class="top-bar">
+        <div class="icons">
+            <img src="{% static 'cart-icon.png' %}" alt="Carrinho">
+            <img src="{% static 'logout-icon.png' %}" alt="Sair">
+        </div>
+    </header>
+
+    <main class="container">
+        {% for produto in produtos %}
+        <div class="card">
+            <img src="{% static produto.imagem %}" alt="{{ produto.nome }}">
+            <h2>{{ produto.nome }}</h2>
+            <p><strong>Cores:</strong> {{ produto.cores }}</p>
+            <p><strong>Tamanho:</strong> {{ produto.tamanho }}</p>
+            <p><strong>Qualidade:</strong> {{ produto.qualidade }}</p>
+            <div class="card-footer">
+                <input type="number" min="1" placeholder="Quantidade">
+                <button>Adicionar</button>
+            </div>
+        </div>
+        {% endfor %}
 </section>
 
 {% endblock content %}
