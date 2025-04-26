@@ -13,6 +13,7 @@ urlpatterns = [
     path('usuarios', views.view_usuarios, name='view_usuarios'),
     path('cargos', views.view_cargos, name='view_cargos'),
     path('itens', views.view_itens, name='view_itens'),
+    # path('itensEditar', views.view_itens_edicao, name='view_itens_edicao'),
     path('emprestimos', views.view_emprestimos, name='view_emprestimos'),
     path('estoque', views.view_estoque, name='view_estoque'),
     #users

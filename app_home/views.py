@@ -19,34 +19,40 @@ def dev(request):
 #---==================================================================================================---
 
 def home(request):
-    return redirect('/usuarios')
+    return render(request, 'app_home/global/index.html', context = {})
     # return render(request, 'app_home/global/index.html', context = get_context(request))
 
 def view_cargos(request):
     ctx = get_context(request)
     ctx['cargos'] = Cargos.objects.all()
-    return render(request, 'app_home/pages/cargos.html', context = get_context(request))
+    return render(request, 'app_home/pages/cargos.html', context = ctx)
 
 def view_itens(request):
     ctx = get_context(request)
     ctx['itens'] = Item.objects.all()
-    return render(request, 'app_home/pages/itens.html', context = get_context(request))
+    print(f"all itens: {ctx['itens']}")
+    return render(request, 'app_home/pages/itens.html', context = ctx)
+# def view_itens_edicao(request):
+#     ctx = get_context(request)
+#     ctx['itens'] = Item.objects.all()
+#     print(f"all edit itens: {ctx['itens']}")
+#     return render(request, 'app_home/pages/editarItem.html', context = ctx)
 
 def view_emprestimos(request):
     ctx = get_context(request)
     ctx['emprestimos'] = Emprestimo.objects.all()
-    return render(request, 'app_home/pages/emprestimos.html', context = get_context(request))
+    return render(request, 'app_home/pages/emprestimos.html', context = ctx)
 
 def view_estoque(request):
     ctx = get_context(request)
     ctx['estoque'] = Estoque.objects.all()
-    return render(request, 'app_home/pages/estoque.html', context = get_context(request))
+    return render(request, 'app_home/pages/estoque.html', context = ctx)
 
 def view_usuarios(request):
     ctx = get_context(request)
     ctx['usuarios'] = Usuario.objects.all()
     print(ctx['usuarios'])
-    return render(request, 'app_home/pages/usuarios.html', context = get_context(request))
+    return render(request, 'app_home/pages/usuarios.html', context = ctx)
 
 
 
@@ -191,31 +197,34 @@ def create_item(request):
                 d_vencimento = request.POST.get('d_vencimento'),
             )
             ctx['newItem'] = newItem
-            return redirect('/get_allItems', context = ctx, status=200)
+            print(ctx)
+            return redirect('/itens', context = ctx, status=200)
         else:
             ctx['error'] = "Falta de parametro" # print("Falta de parametro")
-        return redirect('/get_allItems', context = ctx, status=400)
+        print(ctx)
+        return redirect('/itens', context = ctx, status=400)
     
 def get_allItems(request):
     if request.method == 'GET':
         items = Item.objects.all()
+        print(get_context(request))
         return render(request, 'app_home/components/header.html', context = {'items': items})  
 
 def delete_item(request, id):
     ctx = get_context(request)
-    if request.method == 'POST':
-        if id:
-            if Item.objects.filter(id=id).exists():
-                Item.objects.filter(id=id).delete()
-                return redirect('/get_allItems', context = get_context(request), status=200)
-            else:
-                ctx['error'] = "Item nao encontrado" # print("Item nao encontrado")
+    if id:
+        if Item.objects.filter(id=id).exists():
+            Item.objects.filter(id=id).delete()
+            return redirect('/itens', context = get_context(request), status=200)
         else:
-            ctx['error'] = "Falta de parametro id" # print("Falta de parametro id")
-        return redirect('/get_allItems', context = ctx, status=400)
+            ctx['error'] = "Item nao encontrado" # print("Item nao encontrado")
+    else:
+        ctx['error'] = "Falta de parametro id" # print("Falta de parametro id")
+    return redirect('/itens', context = ctx, status=400)
 
 def update_item(request, id):
     ctx = get_context(request)
+    print(f"id: {id}")
     if request.method == 'POST':
         if id:
             if Item.objects.filter(id=id).exists():
@@ -225,12 +234,30 @@ def update_item(request, id):
                     quantidade = request.POST.get('quantidade'),
                     d_vencimento = request.POST.get('d_vencimento')
                 )
-                return redirect('/get_allItems', context = get_context(request), status=200)
+                return redirect('/itens', context = get_context(request), status=200)
             else:
                 ctx['error'] = "Item nao encontrado" # print("Item nao encontrado")
         else:    
             ctx['error'] = "Falta de parametro id" # print("Falta de parametro id")
-        return redirect('/get_allItems', context = ctx, status=400)
+        return redirect('/itens', context = ctx, status=400)
+    elif request.method == 'GET':
+        if id:
+            if Item.objects.filter(id=id).exists():
+                ctx = get_context(request)
+                ctx['get_item'] = {
+                    'id': id,
+                    'nome': Item.objects.get(id=id).nome,
+                    'img_ref': Item.objects.get(id=id).img_ref,
+                    'quantidade': Item.objects.get(id=id).quantidade,
+                    'd_vencimento': Item.objects.get(id=id).d_vencimento
+                }
+                print(f"update_item: {ctx}")
+        
+                return render(request, 'app_home/pages/editarItem.html', context = ctx)
+            else:
+                print("Item nao encontrado")
+        else:
+            print("Falta de parametro id")
     
 def get_item(request, id):
     

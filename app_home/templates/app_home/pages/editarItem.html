@@ -1,0 +1,21 @@
+{% extends "app_home/global/index.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<section>
+    <h1>Itens Editar</h1>
+    {{ get_item.d_vencimento }}
+    <form action="{% url 'update_item' get_item.id %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="nome" placeholder="Item" value="{{ get_item.nome }}" required>
+        <input type="number" name="quantidade" placeholder="Quantidade" value="{{ get_item.quantidade }}" required>
+        <input type="date" name="d_vencimento" placeholder="Data de Vencimento" value="{{ get_item.d_vencimento|date:'Y-m-d' }}" required>
+        <input type="text" name="img_ref" placeholder="Imagem" value="{{ get_item.img_ref }}" required>
+        <button type="submit">Entrar</button>
+    </form>
+
+</section>
+
+{% endblock content %}

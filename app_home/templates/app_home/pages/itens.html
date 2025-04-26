@@ -4,18 +4,20 @@
 
 {% block content %}
 <section>
-    <h1>Item</h1>
-    <form action="{% url 'create_item' %}" method="POST">
-        {% csrf_token %}
-        <input type="text" name="nome" placeholder="Item" required>
-        <input type="text" name="quantidade" placeholder="Quantidade" required>
-        <input type="date" name="d_vencimento" placeholder="Data de Vencimento" required>
-        <button type="submit">Entrar</button>
-    </form>
+        
+        <h1>Item Create</h1>
+        <form action="{% url 'create_item' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="nome" placeholder="Item" required>
+            <input type="number" name="quantidade" placeholder="Quantidade" required>
+            <input type="date" name="d_vencimento" placeholder="Data de Vencimento" required>
+            <input type="text" name="img_ref" placeholder="Imagem" required>
+            <button type="submit">Entrar</button>
+        </form>
     <h1>Itens</h1>
     <ul>
         {% for item in itens %}
-            <li>{{ item.nome }} - {{ item.quantidade }} - {{ item.d_vencimento }} - {{ item.id }}</li>
+            <li>{{ item.nome }} - {{ item.quantidade }} - {{ item.d_vencimento }} - {{ item.id }} - <img src="{{ item.img_ref }}" alt="Imagem"> - <a href="{% url 'update_item' item.id %}">Editar</a> - <a href="{% url 'delete_item' item.id %}">Deletar</a></li>
         {% endfor %}
     </ul>
 </section>
