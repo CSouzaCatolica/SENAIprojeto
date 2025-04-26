@@ -5,8 +5,8 @@
 {% block content %}
     <section class="conteudo">
         <div class="telas">
-            <a style="color: blue;" href="">Equipamento</a>
-            <a style="color: blue;" href="">Controle EPI</a>
+            <a style="color: blue;" href="{% url 'view_emprestimos' %}">Emprestimos Ativos</a>
+            <a style="color: blue;" href="{% url 'view_emprestimos_criar' %}">Registrar Emprestimo</a>
             <a style="color: blue;" href="{% url 'view_itens' %}">Itens</a>
             <a style="color: blue;" href="{% url 'view_usuarios' %}">Colaborador</a>
         </div>

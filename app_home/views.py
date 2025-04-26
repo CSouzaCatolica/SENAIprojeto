@@ -43,6 +43,18 @@ def view_emprestimos(request):
     ctx['emprestimos'] = Emprestimo.objects.all()
     return render(request, 'app_home/pages/emprestimos.html', context = ctx)
 
+def view_emprestimos_edicao(request):
+    ctx = get_context(request)
+    ctx['emprestimos'] = Emprestimo.objects.all()
+    return render(request, 'app_home/pages/emprestimos.html', context = ctx)
+
+def view_emprestimos_criar(request):
+    ctx = get_context(request)
+    ctx['emprestimos'] = Emprestimo.objects.all()
+    return render(request, 'app_home/pages/makeImprestimo.html', context = ctx)
+
+
+
 def view_estoque(request):
     ctx = get_context(request)
     ctx['estoque'] = Estoque.objects.all()

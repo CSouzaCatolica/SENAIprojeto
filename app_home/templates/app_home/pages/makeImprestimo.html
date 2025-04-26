@@ -1,0 +1,23 @@
+{% extends "app_home/global/index.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<section>
+{% comment %} "id","d_emprestimo","d_devolucao","d_devolvido","quantidade","status","item_id","destinatario_id","solicitante_id" {% endcomment %}
+    <form action="{% url 'create_emprestimo' %}" method="POST">
+        {% csrf_token %}
+        <input type="date" name="d_emprestimo" placeholder="Data de Emprestimo" disabled required value="{% now "Y-m-d" %}">
+        <input type="date" name="d_devolucao" placeholder="Data de Devolucao" required>
+        <input type="date" name="d_devolvido" placeholder="Data de Devolvido" disabled required>
+        <input type="number" name="quantidade" placeholder="Quantidade" required>
+        <input type="number" name="status" placeholder="Status" required>
+        <input type="number" name="item_id" placeholder="Item ID" required>
+        <input type="number" name="destinatario_id" placeholder="Destinatario ID" required>
+        <input type="number" name="solicitante_id" placeholder="Solicitante" disabled required value="1">
+        <button type="submit">Entrar</button>
+    </form>
+
+</section>
+{% endblock content %}	
